@@ -14,11 +14,9 @@ defmodule Mix.Tasks.Post do
     filename = "articles/#{date}-#{downcased}.md"
 
     File.open(filename, [:write], fn(file) ->
-      IO.write(file, "title: #{title}\n")
-      IO.write(file, "date: #{date}\n")
-      IO.write(file, "---\n")
+      IO.write(file, "Contents of the post")
     end)
 
-    IO.puts(" Created #{filename}")
+    IO.puts(" Please edit #{filename}")
   end
 end

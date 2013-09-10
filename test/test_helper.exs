@@ -5,9 +5,7 @@ File.cd "test"
 defmodule TestHelper do
 
   def load_fixture(name) do
-    {:ok, fixture} = File.read("fixtures/#{name}")
-
-    fixture
+    File.read! "fixtures/#{name}"
   end
 
 end

@@ -3,15 +3,8 @@ defmodule Coil.RSSHandler do
   def handle(req, state) do
     index = EEx.compile_file("templates/index.xml.eex")
 
-    {:ok, article_files} = File.ls("articles")
-
-    articles = Enum.map(article_files, &Coil.load_article/1)
-
     {result, _} = Code.eval_quoted(index, [
-      articles: articles,
-      title: "Badosu's blog",
-      host: "http://google.com",
-      author: "Amadeus Folego",
+      articles: Coil.articles,
       last_updated: "2013-9-9",
     ])
 

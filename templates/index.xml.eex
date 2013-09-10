@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><%= title %></title>
-  <id><%= host %></id>
+  <title><%= Coil.config("title") %></title>
+  <id><%= Coil.config("host") %></id>
   <updated><%= last_updated %></updated>
-  <author>
-    <name><%= author %></name>
-  </author>
+  <author><name><%= Coil.config("author") %></name></author>
   <%= Enum.map articles, fn(article) -> %>
   <entry>
     <title><%= article[:title] %></title>
@@ -13,7 +11,7 @@
     <id><%= article[:path] %></id>
     <published><%= article[:date] %></published>
     <updated><%= article[:date] %></updated>
-    <author><name><%= author %></name></author>
+    <author><name><%= Coil.config("author") %></name></author>
     <summary type="html"><%= article[:summary] %></summary>
     <content type="html"><%= article[:content] %></content>
   </entry>

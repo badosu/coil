@@ -1,7 +1,6 @@
 defmodule Coil do
   use Application.Behaviour
 
-
   def start(_type, _args) do
     dispatch = :cowboy_router.compile([
                  {:_, [
@@ -27,13 +26,11 @@ defmodule Coil do
   def article_regex, do: %r/(?<path>(?<date>\w{4}-\w\w?-\w\w?)-(?<title>[\w-]+))/g
 
   def articles do
-    {:ok, article_files} = File.ls("articles")
-
-    Enum.map(article_files, &load_article/1)
+    File.ls!("articles") |> Enum.map(&load_article/1)
   end
 
   def load_article(filename) do
-    {:ok, article} = File.read("articles/#{filename}")
+    article = File.read!("articles/#{filename}")
 
     meta = Regex.captures article_regex, filename
 
@@ -46,5 +43,13 @@ defmodule Coil do
       title: meta[:title] |> String.capitalize |> String.replace("-", " "),
       path: meta[:path],
       date: meta[:date] ]
+  end
+
+  def config do
+    :yamerl_constr.file("config.yml") |> List.flatten
+  end
+
+  def config(key) do
+    config[String.to_char_list!(key)] |> String.from_char_list!
   end
 end
