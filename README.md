@@ -3,12 +3,16 @@ Coil
 
 Coil is a minimalistic blog engine written in elixir.
 
-Usage
------
+Install
+-------
 
-Clone the repo:
+Clone the repo and fetch dependencies:
 
     git clone https://github.com/badosu/coil
+    cd coil && mix deps.get
+
+Usage
+-----
 
 Edit `config.yml`.
 
