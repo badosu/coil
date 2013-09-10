@@ -30,7 +30,16 @@ defmodule Coil do
   end
 
   def load_article(filename) do
-    article = File.read!("articles/#{filename}")
+    if File.exists?("tmp/cache/#{filename}") do
+      article = File.read!("tmp/cache/#{filename}")
+      content = article
+      summary = article
+    else
+      article = File.read!("articles/#{filename}")
+      content = article |> String.to_char_list! |> :markdown.conv
+      summary = article |> String.to_char_list! |> :markdown.conv
+      cache_article(filename, content)
+    end
 
     meta = Regex.captures article_regex, filename
 
@@ -38,8 +47,8 @@ defmodule Coil do
       IO.puts :stderr, "Bad file: #{filename}"
     end
 
-    [ content: article |> String.to_char_list! |> :markdown.conv,
-      summary: article |> String.to_char_list! |> :markdown.conv,
+    [ content: content,
+      summary: summary,
       title: meta[:title] |> String.capitalize |> String.replace("-", " "),
       path: meta[:path],
       date: meta[:date] ]
@@ -51,5 +60,9 @@ defmodule Coil do
 
   def config(key) do
     config[String.to_char_list!(key)] |> String.from_char_list!
+  end
+
+  def cache_article(filename, article) do
+    File.write("tmp/cache/#{filename}", article)
   end
 end
