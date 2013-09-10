@@ -12,3 +12,8 @@ To install and run:
     PORT=3000 mix run --no-halt
 
 Just run `mix post` to create an article file.
+
+License
+-------
+
+The MIT License, see LICENSE
