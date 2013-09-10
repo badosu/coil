@@ -43,9 +43,8 @@ defmodule Coil do
 
     [ content: article |> String.to_char_list! |> :markdown.conv,
       summary: article |> String.to_char_list! |> :markdown.conv,
-      title: Keyword.get(meta, :title) |> String.capitalize
-                                       |> String.replace("-", " "),
-      path: Keyword.get(meta, :path),
-      date: Keyword.get(meta, :date) ]
+      title: meta[:title] |> String.capitalize |> String.replace("-", " "),
+      path: meta[:path],
+      date: meta[:date] ]
   end
 end

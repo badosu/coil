@@ -8,14 +8,14 @@
   </author>
   <%= Enum.map articles, fn(article) -> %>
   <entry>
-    <title><%= Keyword.get article, :title %></title>
-    <link rel="alternate" href="<%= Keyword.get article, :path %>"/>
-    <id><%= Keyword.get article, :path %></id>
-    <published><%= Keyword.get article, :date %></published>
-    <updated><%= Keyword.get article, :date %></updated>
+    <title><%= article[:title] %></title>
+    <link rel="alternate" href="<%= article[:path] %>"/>
+    <id><%= article[:path] %></id>
+    <published><%= article[:date] %></published>
+    <updated><%= article[:date] %></updated>
     <author><name><%= author %></name></author>
-    <summary type="html"><%= Keyword.get article, :summary %></summary>
-    <content type="html"><%= Keyword.get article, :content %></content>
+    <summary type="html"><%= article[:summary] %></summary>
+    <content type="html"><%= article[:content] %></content>
   </entry>
   <% end %>
 </feed>

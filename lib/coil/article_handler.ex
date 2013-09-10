@@ -10,7 +10,7 @@ defmodule Coil.ArticleHandler do
 
     {article_result, _} = Code.eval_quoted(article_template, article)
     {result, _} = Code.eval_quoted(template, [
-                    title: Keyword.get(article, :title),
+                    title: article[:title],
                     content: article_result])
 
     {:ok, req} = :cowboy_req.reply(200, [], result, req)

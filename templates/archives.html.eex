@@ -1,6 +1,6 @@
 <h1>Archives</h1>
 <ul>
   <%= Enum.map articles, fn(article) -> %>
-    <li><a href="<%= Keyword.get article, :path %>"><%= Keyword.get article, :title %></a></li>
+    <li><a href="<%= article[:path] %>"><%= article[:title] %></a></li>
   <% end %>
 </ul>
