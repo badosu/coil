@@ -1,0 +1,8 @@
+[ "cowboy": {:git, "git://github.com/extend/cowboy.git", "2e5eb16f3b827870beb45d2538a0cddc73251a51", []},
+  "datetime": {:git, "git://github.com/alco/elixir-datetime.git", "3bf50d8667fcb54726c0a901425fd61930f159a9", []},
+  "elixir-datetime": {:git, "git://github.com/alco/elixir-datetime.git", "3bf50d8667fcb54726c0a901425fd61930f159a9", []},
+  "erlmarkdown": {:git, "git://github.com/erlware/erlmarkdown.git", "f173bb3c3d5546a5c1ea2bf87fc47892437c62f6", [{:ref, "next"}]},
+  "markdown": {:git, "git://github.com/erlware/erlmarkdown.git", "f173bb3c3d5546a5c1ea2bf87fc47892437c62f6", [{:ref, "next"}]},
+  "mimetypes": {:git, "git://github.com/spawngrid/mimetypes.git", "47d37a977a7d633199822bf6b08353007483d00f", []},
+  "ranch": {:git, "git://github.com/extend/ranch.git", "41705752ffc7e3ecb96eef8374015ead4ca7f699", [{:ref, "0.8.5"}]},
+  "yamerl": {:git, "git://github.com/yakaz/yamerl.git", "261da0ee14eab2c03beb8f4f014d7b421b7540c7", []} ]

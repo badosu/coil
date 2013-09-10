@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="public/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+    <link rel="alternate" type="application/atom+xml" title="<%= title %> - feed" href="/index.xml" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+    <title><%= title %></title>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/">Coil Blog</a>
+      </h1>
+      <nav>
+        <a href="/archives">Archives</a> - <a href="/index.xml">RSS</a>
+      </nav>
+    </header>
+    <section>
+      <%= content %>
+    </section>
+    <footer>
+      Powered by <strong>Coil</strong>
+    </footer>
+  </body>
+</html>

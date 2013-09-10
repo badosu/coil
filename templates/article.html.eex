@@ -1,0 +1,10 @@
+<article class="post article">
+  <header>
+    <h1><%= title %></h1>
+    <span class="date"><%= date %></span>
+  </header>
+
+  <section class="content">
+    <%= content %>
+  </section>
+</article>

@@ -1,0 +1,82 @@
+body {
+  margin: 0 auto;
+  font-family: 'Libre Baskerville', Georgia, Times, serif;
+  max-width: 800px;
+}
+
+body > section {
+  margin-top: 3em;
+  padding: 0 .5em;
+}
+
+body > footer {
+  text-align: left;
+  font-style: italic;
+  color: #888;
+  margin-top: 3em;
+  padding-left: .5em;
+}
+
+body > header {
+  margin-top: 1em;
+  padding-left: .5em;
+  overflow: hidden;
+}
+
+body > header h1 {
+  font-size: 1.5em;
+  float: left;
+}
+
+body > header nav {
+  padding: 1.8em 0 0 3em;
+  float: left;
+  font-style: italic;
+  font-size: small;
+}
+
+header, footer, section, article { display: block; }
+
+hr { margin: 2em 0; }
+
+a { color: #b83000; }
+
+a:hover { text-decoration: underline; }
+
+h1 a { text-decoration: none; }
+
+section h1 { font-size: 2em; }
+
+section h1 a { color: black; }
+
+section h1, h2, h3, h4 { display: inline; }
+
+code {
+  font-family: 'Anonymous Pro', 'Bitstream Vera Sans', 'Monaco', Courier, mono;
+  font-size: 1.1em;
+}
+
+pre { padding: 1em; }
+
+blockquote { font-style: italic; }
+
+.content {
+  line-height: 1.6em;
+  padding-left: 1em;
+}
+
+.article .content { font-size: 1.1em; }
+
+.date {
+  font-style: italic;
+  float: right;
+}
+
+.post .more {
+  font-style: italic;
+  text-align: right;
+}
+
+.more a { text-decoration: none; }
+
+.more a:hover { text-decoration: underline }

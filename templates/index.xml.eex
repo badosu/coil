@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><%= title %></title>
+  <id><%= host %></id>
+  <updated><%= last_updated %></updated>
+  <author>
+    <name><%= author %></name>
+  </author>
+  <%= Enum.map articles, fn(article) -> %>
+  <entry>
+    <title><%= Keyword.get article, :title %></title>
+    <link rel="alternate" href="<%= Keyword.get article, :path %>"/>
+    <id><%= Keyword.get article, :path %></id>
+    <published><%= Keyword.get article, :date %></published>
+    <updated><%= Keyword.get article, :date %></updated>
+    <author><name><%= author %></name></author>
+    <summary type="html"><%= Keyword.get article, :summary %></summary>
+    <content type="html"><%= Keyword.get article, :content %></content>
+  </entry>
+  <% end %>
+</feed>

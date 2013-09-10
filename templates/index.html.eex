@@ -1,0 +1,17 @@
+<section id="articles">
+   <%= Enum.map articles, fn(article) -> %>
+    <article class="post">
+      <header>
+        <h1><a href="<%= Keyword.get article, :path %>"><%= Keyword.get article, :title %></a></h1>
+        <span class="date"><%= Keyword.get article, :date %></span>
+      </header>
+
+      <section class="content">
+        <%= Keyword.get article, :summary %>
+      </section>
+      <div class="more"><a href="<%= Keyword.get article, :path %>">read on &raquo;</a></div>
+
+      <%= unless Enum.first(Enum.reverse(articles)) == article, do: "<hr>" %>
+    </article>
+  <% end %>
+</section>
