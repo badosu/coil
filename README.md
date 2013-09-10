@@ -6,12 +6,18 @@ Coil is a minimalistic blog engine written in elixir.
 Usage
 -----
 
-To install and run:
+Clone the repo:
 
     git clone https://github.com/badosu/coil
+
+Edit `config.yml`.
+
+Add an article: `mix post`
+
+And run:
+
     PORT=3000 mix run --no-halt
 
-Just run `mix post` to create an article file.
 
 License
 -------
