@@ -30,13 +30,25 @@ defmodule Coil do
   end
 
   def article(filename) do
-    article = :gen_server.call(:article_server, filename)
+    article = :gen_server.call(:cache_server, "articles/#{filename}")
 
-    if article == nil do
-      article = load_article(filename)
-    end
+    if article == nil, do: article = load_article(filename)
 
     article
+  end
+
+  def template(filename) do
+    template = :gen_server.call(:cache_server, "templates/#{filename}")
+
+    if template == nil, do: template = load_template(filename)
+
+    template
+  end
+
+  def template(filename, keys) do
+    {result, _} = Code.eval_quoted(template(filename), keys)
+
+    result
   end
 
   def config do
@@ -47,8 +59,26 @@ defmodule Coil do
     config[String.to_char_list!(key)] |> String.from_char_list!
   end
 
-  def load_article(filename) do
-    case File.read("articles/#{filename}") do
+  defp load_template(template) do
+    filename = "templates/#{template}"
+    case File.read(filename) do
+      {:ok, template} ->
+        result = EEx.compile_file(filename)
+        :gen_server.cast(:cache_server, [filename, result])
+
+        result
+      {:error, :enoent} ->
+        IO.puts :stderr, "Does not exist: #{filename}"
+        nil
+      other ->
+        IO.puts :stderr, "Bad file: #{filename}. Reason: #{ inspect other }"
+        nil
+    end
+  end
+
+  defp load_article(article) do
+    filename = "articles/#{article}"
+    case File.read(filename) do
       {:ok, article} ->
         content = article |> String.to_char_list! |> :markdown.conv
         summary = article |> String.to_char_list! |> :markdown.conv
@@ -65,7 +95,7 @@ defmodule Coil do
           path: meta[:path],
           date: meta[:date] ]
 
-        :gen_server.cast(:article_server, [filename, result])
+        :gen_server.cast(:cache_server, [filename, result])
 
         result
       {:error, :enoent} ->

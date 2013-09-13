@@ -1,9 +1,7 @@
 defmodule Coil.RSSHandler do
 
   def handle(req, state) do
-    index = EEx.compile_file("templates/index.xml.eex")
-
-    {result, _} = Code.eval_quoted(index, [
+    result = Coil.template("index.xml.eex", [
       articles: Coil.articles,
       last_updated: "2013-9-9",
     ])

@@ -1,9 +1,4 @@
-# { :ok, pid } = :gen_server.start_link(ArticleServer, HashDict.new, [])
-# :gen_server.cast(pid, b: 1)
-# :gen_server.cast(pid, [:c, 1])
-# :gen_server.call(pid, :b)
-
-defmodule ArticleServer do
+defmodule CacheServer do
   use GenServer.Behaviour
 
   def handle_call(key, _from, config) do
