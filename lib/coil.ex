@@ -26,32 +26,17 @@ defmodule Coil do
   def article_regex, do: %r/(?<path>(?<date>\w{4}-\w\w?-\w\w?)-(?<title>[\w-]+))/g
 
   def articles do
-    File.ls!("articles") |> Enum.map(&load_article/1)
+    File.ls!("articles") |> Enum.map(&article/1)
   end
 
-  def load_article(filename) do
-    if File.exists?("tmp/cache/#{filename}") do
-      article = File.read!("tmp/cache/#{filename}")
-      content = article
-      summary = article
-    else
-      article = File.read!("articles/#{filename}")
-      content = article |> String.to_char_list! |> :markdown.conv
-      summary = article |> String.to_char_list! |> :markdown.conv
-      cache_article(filename, content)
+  def article(filename) do
+    article = :gen_server.call(:article_server, filename)
+
+    if article == nil do
+      article = load_article(filename)
     end
 
-    meta = Regex.captures article_regex, filename
-
-    if meta == nil do
-      IO.puts :stderr, "Bad file: #{filename}"
-    end
-
-    [ content: content,
-      summary: summary,
-      title: meta[:title] |> String.capitalize |> String.replace("-", " "),
-      path: meta[:path],
-      date: meta[:date] ]
+    article
   end
 
   def config do
@@ -62,7 +47,33 @@ defmodule Coil do
     config[String.to_char_list!(key)] |> String.from_char_list!
   end
 
-  def cache_article(filename, article) do
-    File.write("tmp/cache/#{filename}", article)
+  def load_article(filename) do
+    case File.read("articles/#{filename}") do
+      {:ok, article} ->
+        content = article |> String.to_char_list! |> :markdown.conv
+        summary = article |> String.to_char_list! |> :markdown.conv
+
+        meta = Regex.captures article_regex, filename
+
+        if meta == nil do
+          IO.puts :stderr, "Bad file: #{filename}"
+        end
+
+        result = [ content: content,
+          summary: summary,
+          title: meta[:title] |> String.capitalize |> String.replace("-", " "),
+          path: meta[:path],
+          date: meta[:date] ]
+
+        :gen_server.cast(:article_server, [filename, result])
+
+        result
+      {:error, :enoent} ->
+        IO.puts :stderr, "Does not exist: #{filename}"
+        nil
+      other ->
+        IO.puts :stderr, "Bad file: #{filename}. Reason: #{ inspect other }"
+        nil
+    end
   end
 end

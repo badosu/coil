@@ -10,6 +10,7 @@ defmodule Coil.Mixfile do
   # Configuration for the OTP application
   def application do
     [ mod: { Coil, [] },
+      registered: [ :article_server ],
       applications: [:cowboy, :mimetypes, :markdown, :yamerl, :"elixir-datetime"] ]
   end
 
