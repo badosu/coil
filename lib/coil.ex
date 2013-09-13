@@ -61,23 +61,22 @@ defmodule Coil do
 
   defp load_template(template) do
     filename = "templates/#{template}"
-    case File.read(filename) do
-      {:ok, template} ->
-        result = EEx.compile_file(filename)
-        :gen_server.cast(:cache_server, [filename, result])
 
-        result
-      {:error, :enoent} ->
-        IO.puts :stderr, "Does not exist: #{filename}"
-        nil
-      other ->
-        IO.puts :stderr, "Bad file: #{filename}. Reason: #{ inspect other }"
-        nil
+    if File.exists?(filename) do
+      result = EEx.compile_file(filename)
+      :gen_server.cast(:cache_server, [filename, result])
+
+      result
+    else
+      IO.puts :stderr, "Does not exist: #{filename}"
+
+      nil
     end
   end
 
   defp load_article(article) do
     filename = "articles/#{article}"
+
     case File.read(filename) do
       {:ok, article} ->
         content = article |> String.to_char_list! |> :markdown.conv

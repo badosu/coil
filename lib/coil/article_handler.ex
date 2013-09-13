@@ -1,20 +1,16 @@
 defmodule Coil.ArticleHandler do
 
   def handle(req, state) do
-    template = Coil.template("layout.html.eex")
-
     {path, _} = :cowboy_req.path(req)
 
-    article = Coil.article("#{path |> Path.basename}.md")
-
-    case article do
+    case Coil.article("#{path |> Path.basename}.md") do
       nil ->
         {result, _} = Coil.template("layout.html.eex", [
                         title: "Not found",
                         content: "<h1>Not Found</h1><p>Sorry :(</p>"])
 
         {:ok, req} = :cowboy_req.reply(404, [], result, req)
-      other ->
+      article ->
         article_result = Coil.template("article.html.eex", article)
         result = Coil.template("layout.html.eex", [
                                 title: article[:title],
