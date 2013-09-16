@@ -26,7 +26,7 @@ defmodule Coil do
   def article_regex, do: %r/(?<path>(?<date>\w{4}-\w\w?-\w\w?)-(?<title>[\w-]+))/g
 
   def articles do
-    File.ls!("articles") |> Enum.map(&article/1)
+    File.ls!("articles") |> Enum.sort(&(&2 < &1)) |> Enum.map(&article/1)
   end
 
   def article(filename) do
