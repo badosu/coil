@@ -9,7 +9,9 @@ defmodule Coil.RSSHandler do
                                          Enum.map(fn(f) -> f[:date] end) |>
                                          Enum.max ])
 
-    {:ok, req} = :cowboy_req.reply(200, [], result, req)
+    {:ok, req} = :cowboy_req.reply(200,
+                                   [{ "Content-Type", "application/rss+xml" }],
+                                   result, req)
     {:ok, req, state}
   end
 
