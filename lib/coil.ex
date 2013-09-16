@@ -80,7 +80,7 @@ defmodule Coil do
     case File.read(filename) do
       {:ok, article} ->
         content = article |> String.to_char_list! |> :markdown.conv
-        summary = (%r/<p>(?<summary>.*)<\/p>/g |>
+        summary = (%r/(?<summary><p>.*<\/p>)/g |>
                    Regex.captures content)[:summary]
 
         meta =  article_regex |> Regex.captures filename
