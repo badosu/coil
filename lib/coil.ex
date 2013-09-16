@@ -80,9 +80,10 @@ defmodule Coil do
     case File.read(filename) do
       {:ok, article} ->
         content = article |> String.to_char_list! |> :markdown.conv
-        summary = article |> String.to_char_list! |> :markdown.conv
+        summary = (%r/<p>(?<summary>.*)<\/p>/g |>
+                   Regex.captures content)[:summary]
 
-        meta = Regex.captures article_regex, filename
+        meta =  article_regex |> Regex.captures filename
 
         if meta == nil do
           IO.puts :stderr, "Bad file: #{filename}"
