@@ -10,7 +10,7 @@ defmodule Mix.Tasks.Post do
 
     {{year, month, day}, _} = Date.now |> Date.local
 
-    date = "#{year}-#{month}-#{day}"
+    date = "#{year}-#{pad(month)}-#{pad(day)}"
     filename = "articles/#{date}-#{downcased}.md"
 
     File.open(filename, [:write], fn(file) ->
@@ -18,5 +18,13 @@ defmodule Mix.Tasks.Post do
     end)
 
     IO.puts(" Please edit #{filename}")
+  end
+
+  defp pad(number) when number < 10 do
+    "0" <> integer_to_binary(number)
+  end
+
+  defp pad(number) do
+    integer_to_binary(number)
   end
 end
