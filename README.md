@@ -20,7 +20,7 @@ Add an article: `mix post`
 
 And run:
 
-    PORT=3000 mix run --no-halt
+    PORT=8080 mix run --no-halt
 
 Deploy to Heroku:
 
