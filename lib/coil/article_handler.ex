@@ -5,7 +5,7 @@ defmodule Coil.ArticleHandler do
 
     case Coil.article("#{path |> Path.basename}.md") do
       nil ->
-        {result, _} = Coil.template("layout.html.eex", [
+        result = Coil.template("layout.html.eex", [
                         title: "Not found",
                         content: "<h1>Not Found</h1><p>Sorry :(</p>"])
 
