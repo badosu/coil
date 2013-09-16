@@ -22,6 +22,11 @@ And run:
 
     PORT=3000 mix run --no-halt
 
+Deploy to Heroku:
+
+    heroku create --buildpack "https://github.com/goshakkk/heroku-buildpack-elixir.git"
+    git push heroku master
+
 
 License
 -------
