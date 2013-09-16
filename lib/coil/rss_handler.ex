@@ -5,9 +5,7 @@ defmodule Coil.RSSHandler do
 
     result = Coil.template("index.xml.eex", [
                            articles: articles,
-                           last_updated: articles |>
-                                         Enum.map(fn(f) -> f[:date] end) |>
-                                         Enum.max ])
+                           last_updated: Enum.first(articles)[:date] ])
 
     {:ok, req} = :cowboy_req.reply(200,
                                    [{ "Content-Type", "application/rss+xml" }],
