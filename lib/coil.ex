@@ -52,7 +52,14 @@ defmodule Coil do
   end
 
   def config do
-    :yamerl_constr.file("config.yml") |> List.flatten
+    config = :gen_server.call(:cache_server, :"config.yml")
+
+    if config == nil do
+      config = :yamerl_constr.file("config.yml") |> List.flatten
+      :gen_server.cast(:cache_server, [:"config.yml", config])
+    end
+
+    config
   end
 
   def config(key) do
