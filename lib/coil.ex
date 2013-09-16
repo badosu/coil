@@ -32,7 +32,7 @@ defmodule Coil do
   def article(filename) do
     article = :gen_server.call(:cache_server, "articles/#{filename}")
 
-    if article == nil, do: article = load_article(filename)
+    if article == nil, do: article = load_article("articles/#{filename}")
 
     article
   end
@@ -40,7 +40,7 @@ defmodule Coil do
   def template(filename) do
     template = :gen_server.call(:cache_server, "templates/#{filename}")
 
-    if template == nil, do: template = load_template(filename)
+    if template == nil, do: template = load_template("templates/#{filename}")
 
     template
   end
@@ -52,11 +52,11 @@ defmodule Coil do
   end
 
   def config do
-    config = :gen_server.call(:cache_server, :"config.yml")
+    config = :gen_server.call(:cache_server, "config.yml")
 
     if config == nil do
       config = :yamerl_constr.file("config.yml") |> List.flatten
-      :gen_server.cast(:cache_server, [:"config.yml", config])
+      :gen_server.cast(:cache_server, ["config.yml", config])
     end
 
     config
@@ -66,51 +66,27 @@ defmodule Coil do
     config[String.to_char_list!(key)] |> String.from_char_list!
   end
 
-  defp load_template(template) do
-    filename = "templates/#{template}"
-
-    if File.exists?(filename) do
-      result = EEx.compile_file(filename)
-      :gen_server.cast(:cache_server, [filename, result])
-
-      result
-    else
-      IO.puts :stderr, "Does not exist: #{filename}"
-
-      nil
-    end
+  defp load_template(filename) do
+    :gen_server.cast(:cache_server, [filename, EEx.compile_file(filename)])
+    :gen_server.call(:cache_server, filename)
+  rescue File.Error -> nil
   end
 
-  defp load_article(article) do
-    filename = "articles/#{article}"
+  defp load_article(filename) do
+    content = File.read!(filename) |> String.to_char_list! |> :markdown.conv
+    summary = (%r/(?<summary><p>.*<\/p>)/g |>
+               Regex.captures content)[:summary]
+    meta = article_regex |> Regex.captures filename
 
-    case File.read(filename) do
-      {:ok, article} ->
-        content = article |> String.to_char_list! |> :markdown.conv
-        summary = (%r/(?<summary><p>.*<\/p>)/g |>
-                   Regex.captures content)[:summary]
+    :gen_server.cast(:cache_server, [filename, [
+      content: content,
+      summary: summary,
+      title: meta[:title] |> String.capitalize |> String.replace("-", " "),
+      path: meta[:path],
+      date: meta[:date] ]
+    ])
 
-        meta =  article_regex |> Regex.captures filename
-
-        if meta == nil do
-          IO.puts :stderr, "Bad file: #{filename}"
-        end
-
-        result = [ content: content,
-          summary: summary,
-          title: meta[:title] |> String.capitalize |> String.replace("-", " "),
-          path: meta[:path],
-          date: meta[:date] ]
-
-        :gen_server.cast(:cache_server, [filename, result])
-
-        result
-      {:error, :enoent} ->
-        IO.puts :stderr, "Does not exist: #{filename}"
-        nil
-      other ->
-        IO.puts :stderr, "Bad file: #{filename}. Reason: #{ inspect other }"
-        nil
-    end
+    :gen_server.call(:cache_server, filename)
+  rescue File.Error -> nil
   end
 end
