@@ -1,10 +1,13 @@
 defmodule Coil.RSSHandler do
 
   def handle(req, state) do
+    articles = Coil.articles
+
     result = Coil.template("index.xml.eex", [
-      articles: Coil.articles,
-      last_updated: "2013-9-9",
-    ])
+                           articles: articles,
+                           last_updated: articles |>
+                                         Enum.map(fn(f) -> f[:date] end) |>
+                                         Enum.max ])
 
     {:ok, req} = :cowboy_req.reply(200, [], result, req)
     {:ok, req, state}
