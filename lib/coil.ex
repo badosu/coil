@@ -8,7 +8,7 @@ defmodule Coil do
                         {"/public/[:...]", :cowboy_static, [
                              directory: "public",
                              mimetypes: { &:mimetypes.path_to_mimes/2, :default } ] },
-                        {"/index.xml", Coil.RSSHandler, []},
+                        {"/feed", Coil.RSSHandler, []},
                         {"/archives", Coil.ArchivesHandler, []},
                         {"/[:...]", Coil.ArticleHandler, []}
                       ]}
