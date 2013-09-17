@@ -11,12 +11,20 @@ defmodule Coil.ArticleHandler do
 
         {:ok, req} = :cowboy_req.reply(404, [], result, req)
       article ->
-        article_result = Coil.template("article.html.eex", article)
-        result = Coil.template("layout.html.eex", [
-                                title: article[:title],
-                                content: article_result])
+        etag = (:cowboy_req.headers(req) |> elem 0)["if-none-match"]
 
-        {:ok, req} = :cowboy_req.reply(200, [], result, req)
+        if article[:md5] == etag do
+          {:ok, req} = :cowboy_req.reply(304, [], "", req)
+        else
+          article_result = Coil.template("article.html.eex", article)
+          result = Coil.template("layout.html.eex", [
+                                  title: article[:title],
+                                  content: article_result])
+
+          headers = [ {"ETag", article[:md5] } ]
+
+          {:ok, req} = :cowboy_req.reply(200, headers, result, req)
+        end
     end
 
     {:ok, req, state}

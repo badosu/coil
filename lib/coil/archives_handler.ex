@@ -1,15 +1,22 @@
 defmodule Coil.ArchivesHandler do
 
   def handle(req, state) do
-    index = EEx.compile_file("templates/archives.html.eex")
-    template = EEx.compile_file("templates/layout.html.eex")
+    articles = Coil.articles
+    etag = (:cowboy_req.headers(req) |> elem 0)["if-none-match"]
 
-    {index_result, _} = Code.eval_quoted(index, [articles: Coil.articles])
-    {result, _} = Code.eval_quoted(template, [
-                                   title: "#{ Coil.config("title") } - Archives",
-                                   content: index_result])
+    if Enum.first(articles)[:md5] == etag do
+      {:ok, req} = :cowboy_req.reply(304, [], "", req)
+    else
+      archives = Coil.template("archives.html.eex", [articles: articles])
+      result = Coil.template("layout.html.eex", [
+                                     title: "#{ Coil.config("title") } - Archives",
+                                     content: archives])
 
-    {:ok, req} = :cowboy_req.reply(200, [], result, req)
+      headers = [ {"ETag", Enum.first(articles)[:md5] } ]
+
+      {:ok, req} = :cowboy_req.reply(200, headers, result, req)
+    end
+
     {:ok, req, state}
   end
 

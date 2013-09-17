@@ -81,6 +81,7 @@ defmodule Coil do
     :gen_server.cast(:cache_server, [filename, [
       content: content,
       summary: summary,
+      md5: :crypto.md5(content),
       title: meta[:title] |> String.capitalize |> String.replace("-", " "),
       path: meta[:path],
       date: meta[:date] ]

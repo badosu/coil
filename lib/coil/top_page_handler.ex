@@ -1,11 +1,20 @@
 defmodule Coil.TopPageHandler do
 
   def handle(req, state) do
-    index_result = Coil.template("index.html.eex", [articles: Coil.articles])
-    result = Coil.template("layout.html.eex", [title: Coil.config("title"),
-                                              content: index_result])
+    articles = Coil.articles
+    etag = (:cowboy_req.headers(req) |> elem 0)["if-none-match"]
 
-    {:ok, req} = :cowboy_req.reply(200, [], result, req)
+    if Enum.first(articles)[:md5] == etag do
+      {:ok, req} = :cowboy_req.reply(304, [], "", req)
+    else
+      index_result = Coil.template("index.html.eex", [articles: articles])
+      result = Coil.template("layout.html.eex", [title: Coil.config("title"),
+                                                 content: index_result])
+      headers = [ {"ETag", Enum.first(articles)[:md5] } ]
+
+      {:ok, req} = :cowboy_req.reply(200, headers, result, req)
+    end
+
     {:ok, req, state}
   end
 
