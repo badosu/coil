@@ -11,14 +11,13 @@ defmodule Coil.Mixfile do
   def application do
     [ mod: { Coil, [] },
       registered: [ :cache_server ],
-      applications: [:cowboy, :mimetypes, :markdown, :yamerl, :"elixir-datetime"] ]
+      applications: [:cowboy, :mimetypes, :markdown, :yamerl] ]
   end
 
   defp deps do
     [ {:cowboy, github: "extend/cowboy"},
       {:mimetypes, github: "spawngrid/mimetypes"},
       {:markdown, github: "erlware/erlmarkdown", ref: "next" },
-      {:"elixir-datetime", github: "alco/elixir-datetime"},
       {:yamerl, github: "yakaz/yamerl" } ]
   end
 end

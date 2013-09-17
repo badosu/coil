@@ -8,7 +8,7 @@ defmodule Mix.Tasks.Post do
     downcased = title |> String.downcase
                       |> String.replace(" ", "-")
 
-    {{year, month, day}, _} = Date.now |> Date.local
+    {{year, month, day}, _} = :calendar.local_time
 
     date = "#{year}-#{pad(month)}-#{pad(day)}"
     filename = "articles/#{date}-#{downcased}.md"
