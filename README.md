@@ -15,11 +15,11 @@ cd coilblog && mix deps.get
 
 ### Using the `mix coil` command
 
-Clone the repo and fetch dependencies:
+Clone the repo, fetch dependencies and compile:
 
 ````bash
 git clone https://github.com/badosu/coil
-cd coil && mix deps.get
+cd coil && mix do deps.get, compile
 ````
 
 Bootstrap a sample coil blog:
