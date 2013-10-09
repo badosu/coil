@@ -6,14 +6,18 @@ Coil is a minimalistic blog engine written in elixir.
 Install
 -------
 
-### Cloning a sample repo
+You must have the latest stable version of elixir installed.
+
+Choose one of the following:
+
+### Clone a sample repo
 
 ````bash
 git clone https://github.com/badosu/coilblog
 cd coilblog && mix deps.get
 ```
 
-### Using the `mix coil` command
+### Use the `mix coil` command
 
 Clone the repo, fetch dependencies and compile:
 
