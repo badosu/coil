@@ -1,4 +1,4 @@
-[ "coil": {:git, "git://github.com/badosu/coil.git", "dfa39555250a82e25f972c4409a703b9f85e6ed0", []},
+[ "coil": {:git, "git://github.com/badosu/coil.git", "a60d0563697e0aecd0ce25c2f1baef13ae587ba8", []},
   "cowboy": {:git, "git://github.com/extend/cowboy.git", "eb4843a46b781f93030b623e2b1feb1898ba3da0", []},
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "2f35af5b0a67f591dde5ae4305a9587988a37c0c", [{:ref, "0.1.0"}]},
   "markdown": {:git, "git://github.com/erlware/erlmarkdown.git", "535be8c4b24a4b3e0c86e219418092d77cf13f26", [{:ref, "next"}]},
