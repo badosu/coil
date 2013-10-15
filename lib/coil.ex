@@ -73,7 +73,7 @@ defmodule Coil do
   end
 
   defp load_article(filename) do
-    content = File.read!(filename) |> String.to_char_list! |> :markdown.conv
+    content = File.read!(filename) |> Markdown.to_html
     summary = (%r/(?<summary><p>.*<\/p>)/g |>
                Regex.named_captures content)[:summary]
     meta = article_regex |> Regex.named_captures filename

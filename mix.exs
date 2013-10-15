@@ -11,13 +11,13 @@ defmodule Coil.Mixfile do
   def application do
     [ mod: { Coil, [] },
       registered: [ :cache_server ],
-      applications: [:cowboy, :mimetypes, :markdown, :yamerl] ]
+      applications: [:cowboy, :mimetypes, :ex_doc, :yamerl] ]
   end
 
   defp deps do
-    [ {:cowboy, github: "extend/cowboy"},
-      {:mimetypes, github: "spawngrid/mimetypes"},
-      {:markdown, github: "erlware/erlmarkdown", ref: "next" },
-      {:yamerl, github: "yakaz/yamerl" } ]
+    [ { :cowboy,    github: "extend/cowboy" },
+      { :mimetypes, github: "spawngrid/mimetypes" },
+      { :ex_doc,    github: "elixir-lang/ex_doc" },
+      { :yamerl,    github: "yakaz/yamerl" } ]
   end
 end
