@@ -77,7 +77,7 @@ defmodule Coil do
 
   defp load_article(filename) do
     content = File.read!(filename) |> Markdown.to_html
-    summary = (%r/(?<summary><p>.*<\/p>)/gs |> Regex.named_captures content)[:summary]
+    summary = (%r/(?<summary><p>.*?<\/p>)/gs |> Regex.named_captures content)[:summary]
     meta = article_regex |> Regex.named_captures filename
 
     :gen_server.cast(:cache_server, [filename, [
