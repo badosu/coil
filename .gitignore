@@ -1,2 +1,3 @@
-deps/
-ebin/
+/deps/
+/ebin/
+/_build
