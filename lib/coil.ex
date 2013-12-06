@@ -23,10 +23,13 @@ defmodule Coil do
     Coil.Supervisor.start_link
   end
 
-  def article_regex, do: %r/(?<path>(?<date>\w{4}-\w\w?-\w\w?)-(?<title>[\w-]+))/g
+  def article_regex do
+    %r/(?<path>(?<date>\w{4}-\w\w?-\w\w?)-(?<title>[\w-]+))\.md$/g
+  end
 
   def articles do
-    File.ls!("articles") |> Enum.sort(&(&2 < &1)) |> Enum.map(&article/1)
+    File.ls!("articles") |> Enum.filter(fn(a) -> article_regex |> Regex.match?(a) end)
+    |> Enum.sort(&(&2 < &1)) |> Enum.map(&article/1)
   end
 
   def article(filename) do
