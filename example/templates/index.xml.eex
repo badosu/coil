@@ -12,8 +12,8 @@
     <published><%= article[:date] %></published>
     <updated><%= article[:date] %></updated>
     <author><name><%= Coil.config("author") %></name></author>
-    <summary type="html"><%= article[:summary] %></summary>
-    <content type="html"><%= article[:content] %></content>
+    <summary type="html"><![CDATA[<%= article[:summary] %>]]></summary>
+    <content type="html"><![CDATA[<%= article[:content] %>]]></content>
   </entry>
   <% end %>
 </feed>
