@@ -1,0 +1,3 @@
+<section id="page">
+  <%= content %>
+</section>

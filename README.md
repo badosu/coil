@@ -69,8 +69,15 @@ See the [EEx docs](http://elixir-lang.org/docs/stable/EEx.html)
 * `layout.html.eex` The template in which all other templates are embedded
 * `index.html.eex` Renders the home page
 * `article.html.eex` Renders the article page
+* `page.html.eex` Renders the page page
 * `archives.html.eex` Renders the archives page
 * `index.xml.eex` Renders the rss feed
+
+### Pages
+
+The content should be plain markdown.
+
+Pages are stored in `pages/title.md`
 
 ### Articles
 

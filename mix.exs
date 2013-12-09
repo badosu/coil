@@ -3,7 +3,7 @@ defmodule Coil.Mixfile do
 
   def project do
     [ app: :coil,
-      version: "0.2.0",
+      version: "0.3.0",
       deps: deps ]
   end
 

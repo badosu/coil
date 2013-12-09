@@ -10,6 +10,7 @@ defmodule Coil do
                              mimetypes: { &:mimetypes.path_to_mimes/2, :default } ] },
                         {"/feed", Coil.RSSHandler, []},
                         {"/archives", Coil.ArchivesHandler, []},
+                        {"/pages/[:...]", Coil.PageHandler, []},
                         {"/[:...]", Coil.ArticleHandler, []}
                       ]}
                ])
@@ -38,6 +39,14 @@ defmodule Coil do
     if article == nil, do: article = load_article("articles/#{filename}")
 
     article
+  end
+
+  def page(filename) do
+    page = :gen_server.call(:cache_server, "pages/#{filename}")
+
+    if page == nil, do: page = load_page("pages/#{filename}")
+
+    page
   end
 
   def template(filename) do
@@ -71,6 +80,21 @@ defmodule Coil do
 
   defp load_template(filename) do
     :gen_server.cast(:cache_server, [filename, EEx.compile_file(filename)])
+    :gen_server.call(:cache_server, filename)
+  rescue File.Error -> nil
+  end
+
+  defp load_page(filename) do
+    content = File.read!(filename) |> Markdown.to_html
+
+    meta = %r/(?<title>[\w-]+)\.md$/g |> Regex.named_captures filename
+
+    :gen_server.cast(:cache_server, [filename, [
+      content: content,
+      title: meta[:title] |> String.capitalize |> String.replace("-", " "),
+      md5: :crypto.hash(:md5, content) ]
+    ])
+
     :gen_server.call(:cache_server, filename)
   rescue File.Error -> nil
   end
