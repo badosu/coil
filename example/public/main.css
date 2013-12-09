@@ -1,7 +1,41 @@
+/*----------------------------------------------------------------------------
+Global Reset
+----------------------------------------------------------------------------*/
+
+* {
+  padding:0;
+  margin:0;
+}
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, label, ul, ol, dl, fieldset, address { margin:1em 0; }
+li, dd { margin-left:5%; }
+fieldset { padding: .5em; }
+select option{ padding:0 5px; }
+
+.access{ display:none; } /* For accessibility related elements */
+.clear{ clear:both; height:0px; font-size:0px; line-height:0px; overflow:hidden; }
+a{ outline:none; }
+a img{ border:none; }
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+* html .clearfix { height: 1%; }
+.clearfix { display:inline-block; }
+.clearfix { display: block; }
+
+/*----------------------------------------------------------------------------
+Body
+----------------------------------------------------------------------------*/
+
 body {
   margin: 0 auto;
   font-family: 'Libre Baskerville', Georgia, Times, serif;
-  max-width: 800px;
+  max-width: 680px;
+  padding: 0 20px;
 }
 
 body > section {
@@ -13,7 +47,8 @@ body > footer {
   text-align: left;
   font-style: italic;
   color: #888;
-  margin-top: 3em;
+  margin-top: 5em;
+  margin-bottom: 2em;
   padding-left: .5em;
 }
 
@@ -29,7 +64,7 @@ body > header h1 {
 }
 
 body > header nav {
-  padding: 1.8em 0 0 3em;
+  padding: .5em 0 0 3em;
   float: left;
   font-style: italic;
   font-size: small;
@@ -49,11 +84,8 @@ section h1 { font-size: 2em; }
 
 section h1 a { color: black; }
 
-section h1, h2, h3, h4 { display: inline; }
-
 code {
   font-family: 'Anonymous Pro', 'Bitstream Vera Sans', 'Monaco', Courier, mono;
-  font-size: 1.1em;
 }
 
 pre { padding: 1em; }
@@ -62,10 +94,12 @@ blockquote { font-style: italic; }
 
 .content {
   line-height: 1.6em;
-  padding-left: 1em;
+  clear: both;
 }
 
-.article .content { font-size: 1.1em; }
+.content p {
+  padding-left: 1em;
+}
 
 .date {
   font-style: italic;
@@ -75,6 +109,24 @@ blockquote { font-style: italic; }
 .post .more {
   font-style: italic;
   text-align: right;
+}
+
+#articles .content {
+  max-width: 45em;
+}
+
+section header {
+  margin-bottom: 3em;
+  height: 2em;
+}
+
+header h1 {
+  float: left;
+  margin: 0;
+}
+
+h2 {
+  margin-top: 2em;
 }
 
 .more a { text-decoration: none; }
