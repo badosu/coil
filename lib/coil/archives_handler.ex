@@ -5,14 +5,14 @@ defmodule Coil.ArchivesHandler do
     etag = (:cowboy_req.headers(req) |> elem 0)["if-none-match"]
 
     if Enum.first(articles)[:md5] == etag do
-      {:ok, req} = :cowboy_req.reply(304, [], "", req)
+      {:ok, req} = :cowboy_req.reply(304, Coil.headers, "", req)
     else
       archives = Coil.template("archives.html.eex", [articles: articles])
       result = Coil.template("layout.html.eex", [
                                      title: "#{ Coil.config("title") } - Archives",
                                      content: archives])
 
-      headers = [ {"ETag", Enum.first(articles)[:md5] } ]
+      headers = Coil.headers |> Enum.concat [ {"ETag", Enum.first(articles)[:md5] } ]
 
       {:ok, req} = :cowboy_req.reply(200, headers, result, req)
     end

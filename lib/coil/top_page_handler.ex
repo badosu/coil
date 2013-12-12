@@ -4,13 +4,13 @@ defmodule Coil.TopPageHandler do
     articles = Coil.articles
     etag = (:cowboy_req.headers(req) |> elem 0)["if-none-match"]
 
-    if Enum.first(articles)[:md5] == etag do
-      {:ok, req} = :cowboy_req.reply(304, [], "", req)
+    if (md5 = Enum.first(articles)[:md5]) == etag do
+      {:ok, req} = :cowboy_req.reply(304, Coil.headers, "", req)
     else
       index_result = Coil.template("index.html.eex", [articles: articles])
       result = Coil.template("layout.html.eex", [title: Coil.config("title"),
                                                  content: index_result])
-      headers = [ {"ETag", Enum.first(articles)[:md5] } ]
+      headers = Coil.headers |> Enum.concat [{"ETag", md5}]
 
       {:ok, req} = :cowboy_req.reply(200, headers, result, req)
     end

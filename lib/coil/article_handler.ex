@@ -9,7 +9,7 @@ defmodule Coil.ArticleHandler do
                         title: "Not found",
                         content: "<h1>Not Found</h1><p>Sorry :(</p>"])
 
-        {:ok, req} = :cowboy_req.reply(404, [], result, req)
+        {:ok, req} = :cowboy_req.reply(404, Coil.headers, result, req)
       article ->
         etag = (:cowboy_req.headers(req) |> elem 0)["if-none-match"]
 
@@ -21,7 +21,7 @@ defmodule Coil.ArticleHandler do
                                   title: article[:title],
                                   content: article_result])
 
-          headers = [ {"ETag", article[:md5] } ]
+          headers = Coil.headers |> Enum.concat [{"ETag", article[:md5]}]
 
           {:ok, req} = :cowboy_req.reply(200, headers, result, req)
         end

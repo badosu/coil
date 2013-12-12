@@ -28,6 +28,8 @@ defmodule Coil do
     %r/(?<path>(?<date>\w{4}-\w\w?-\w\w?)-(?<title>[\w-]+))\.md$/g
   end
 
+  def headers, do: [ {"Content-Type", "text/html; charset=UTF-8" } ]
+
   def articles do
     File.ls!("articles") |> Enum.filter(fn(a) -> article_regex |> Regex.match?(a) end)
     |> Enum.sort(&(&2 < &1)) |> Enum.map(&article/1)
