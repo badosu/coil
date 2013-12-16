@@ -51,7 +51,7 @@ Customize
 ---------
 
 If you have a `mix.exs` file requiring the coil lib properly, like
-[this one](/blob/master/example/mix.exs) you have only to follow the guidelines
+[this one](/example/mix.exs) you have only to follow the guidelines
 below to get it working.
 
 ### Articles
