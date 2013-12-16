@@ -1,21 +1,21 @@
-defmodule CoilBlog.Mixfile do
+defmodule Blog.Mixfile do
   use Mix.Project
 
   def project do
-    [ app: :coilblog, version: "0.1.0",
+    [ app: :blog, version: "0.1.0",
       deps: [ {:coil, github: "badosu/coil"} ] ]
   end
 
-  def application, do: [ mod: { CoilBlog, [] }, applications: [:coil] ]
+  def application, do: [ mod: { Blog, [] }, applications: [:coil] ]
 end
 
-defmodule CoilBlog do
+defmodule Blog do
   use Application.Behaviour
 
-  def start(_, _), do: CoilBlog.Supervisor.start_link
+  def start(_, _), do: Blog.Supervisor.start_link
 end
 
-defmodule CoilBlog.Supervisor do
+defmodule Blog.Supervisor do
   use Supervisor.Behaviour
 
   def start_link, do: :supervisor.start_link(__MODULE__, [])
