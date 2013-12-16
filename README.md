@@ -12,7 +12,7 @@ Choose one of the following:
 
 ### Clone a sample repo
 
-````bash
+```bash
 git clone https://github.com/badosu/coilblog
 cd coilblog && mix deps.get
 ```
@@ -21,14 +21,14 @@ cd coilblog && mix deps.get
 
 Clone the repo, fetch dependencies and compile:
 
-````bash
+```bash
 git clone https://github.com/badosu/coil
 cd coil && mix do deps.get, compile
-````
+```
 
 Bootstrap a sample coil blog:
 
-````bash
+```bash
 mix coil ../my-blog
 cd ../my-blog && mix deps.get
 ```
@@ -42,16 +42,16 @@ Add an article: `mix post`
 
 And run:
 
-````bash
+```bash
 PORT=8080 mix run --no-halt
-````
+```
 
 Deploy to Heroku:
 
-````bash
+```bash
 heroku create --buildpack "https://github.com/goshakkk/heroku-buildpack-elixir.git"
 git push heroku master
-````
+```
 
 Customize
 ---------
