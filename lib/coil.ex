@@ -10,8 +10,8 @@ defmodule Coil do
                              mimetypes: { &:mimetypes.path_to_mimes/2, :default } ] },
                         {"/feed", Coil.RSSHandler, []},
                         {"/archives", Coil.ArchivesHandler, []},
-                        {"/pages/[:...]", Coil.PageHandler, []},
-                        {"/[:...]", Coil.ArticleHandler, []}
+                        {"/articles/[:...]", Coil.ArticleHandler, []},
+                        {"/[:...]", Coil.PageHandler, []}
                       ]}
                ])
 
@@ -111,7 +111,7 @@ defmodule Coil do
       summary: summary,
       md5: :crypto.hash(:md5, content),
       title: meta[:title] |> String.capitalize |> String.replace("-", " "),
-      path: meta[:path],
+      path: "articles/#{meta[:path]}",
       date: meta[:date] ]
     ])
 
