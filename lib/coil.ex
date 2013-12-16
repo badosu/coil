@@ -5,9 +5,7 @@ defmodule Coil do
     dispatch = :cowboy_router.compile([
                  {:_, [
                         {"/", Coil.TopPageHandler, []},
-                        {"/public/[:...]", :cowboy_static, [
-                             directory: "public",
-                             mimetypes: { &:mimetypes.path_to_mimes/2, :default } ] },
+                        {"/assets/[:...]", :cowboy_static, { :dir, "assets" } },
                         {"/feed", Coil.RSSHandler, []},
                         {"/archives", Coil.ArchivesHandler, []},
                         {"/articles/[:...]", Coil.ArticleHandler, []},

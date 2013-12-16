@@ -3,7 +3,7 @@ defmodule Coil.Mixfile do
 
   def project do
     [ app: :coil,
-      version: "0.3.0",
+      version: "0.4.0",
       deps: deps ]
   end
 
@@ -16,7 +16,6 @@ defmodule Coil.Mixfile do
 
   defp deps do
     [ { :cowboy,    github: "extend/cowboy" },
-      { :mimetypes, github: "spawngrid/mimetypes" },
       { :ex_doc,    github: "elixir-lang/ex_doc" },
       { :yamerl,    github: "yakaz/yamerl" } ]
   end

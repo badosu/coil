@@ -1,6 +1,5 @@
-[ "cowboy": {:git, "git://github.com/extend/cowboy.git", "eb4843a46b781f93030b623e2b1feb1898ba3da0", []},
-  "cowlib": {:git, "git://github.com/extend/cowlib.git", "2f35af5b0a67f591dde5ae4305a9587988a37c0c", [{:ref, "0.1.0"}]},
-  "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "00698580275eb245de02dca0b3ae589ddb8e398b", []},
-  "mimetypes": {:git, "git://github.com/spawngrid/mimetypes.git", "47d37a977a7d633199822bf6b08353007483d00f", []},
-  "ranch": {:git, "git://github.com/extend/ranch.git", "41705752ffc7e3ecb96eef8374015ead4ca7f699", [{:ref, "0.8.5"}]},
+[ "cowboy": {:git, "git://github.com/extend/cowboy.git", "9f33a20d9425daf7491836e73f503c206cc170be", []},
+  "cowlib": {:git, "git://github.com/extend/cowlib.git", "63298e8e160031a70efff86a1acde7e7db1fcda6", [{:ref, "0.4.0"}]},
+  "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "a9eaade0ab8f17e17c894b6eadda10656585e378", []},
+  "ranch": {:git, "git://github.com/extend/ranch.git", "5df1f222f94e08abdcab7084f5e13027143cc222", [{:ref, "0.9.0"}]},
   "yamerl": {:git, "git://github.com/yakaz/yamerl.git", "261da0ee14eab2c03beb8f4f014d7b421b7540c7", []} ]

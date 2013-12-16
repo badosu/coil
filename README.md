@@ -3,10 +3,15 @@ Coil
 
 Coil is a minimalistic static content engine written in elixir.
 
-Install
+Requirements
 -------
 
-You must have the latest stable version of elixir installed.
+You must have the latest stable version of elixir installed,
+[v0.12.0](https://github.com/elixir-lang/elixir/releases/tag/v0.12.0) as of
+the writing of this.
+
+Install
+-------
 
 Clone the repo, fetch dependencies and compile:
 
@@ -33,11 +38,7 @@ Usage
 
 Add an article: `mix post`.
 
-And run:
-
-```bash
-PORT=8080 mix run --no-halt
-```
+Run (on port 8080): `PORT=8080 mix run --no-halt`.
 
 Deploy to Heroku:
 
@@ -68,7 +69,7 @@ Pages are stored in `pages/title.md` and accessible via `/title`
 
 ### Resources
 
-Any file stored on the `public/` folder will be served at the `/public` route
+Any file stored on the `assets/` folder will be served at the `/assets` route.
 
 ### Templates
 

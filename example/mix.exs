@@ -2,7 +2,7 @@ defmodule Blog.Mixfile do
   use Mix.Project
 
   def project do
-    [ app: :blog, version: "0.1.0",
+    [ app: :blog, version: "1.0.0",
       deps: [ {:coil, github: "badosu/coil"} ] ]
   end
 
