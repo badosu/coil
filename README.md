@@ -51,30 +51,40 @@ Customize
 ---------
 
 If you have a `mix.exs` file requiring the coil lib properly, like
-[this one](/example/mix.exs) you have only to follow the guidelines
-below to get it working.
+[this one](/example/mix.exs), you have only to follow the structure
+below to get it working:
 
-### Articles
+    .
+    |-- articles
+    |   `-- YYYY-mm-dd-article-title.md
+    |-- assets
+    |   `-- example.css
+    |-- config.yml
+    |-- mix.exs
+    |-- pages
+    |   `-- title.md
+    `-- templates
+        |-- archives.html.eex
+        |-- article.html.eex
+        |-- index.html.eex
+        |-- index.xml.eex
+        |-- layout.html.eex
+        `-- page.html.eex
 
-The content should be plain markdown.
+### Routes
 
-Articles are stored in `articles/YYYY-mm-dd-article-title.md`, and accessed via
-`/articles/YYYY-mm-dd-article-title`.
-
-### Pages
-
-The content should be plain markdown.
-
-Pages are stored in `pages/title.md` and accessible via `/title`
-
-### Resources
-
-Any file stored on the `assets/` folder will be served at the `/assets` route.
+* Index: `/`
+* Page: `/title`
+* Resource: `/assets/example.css`
+* Article: `/articles/YYYY-mm-dd-article-title`
+* RSS feed: `/feed`
+* Archives: `/archives`
 
 ### Templates
 
-Templates are stored in the `templates/` folder, and are embedded elixir files
-(see the [EEx docs](http://elixir-lang.org/docs/stable/EEx.html)):
+Templates are embedded elixir files
+(see the [EEx docs](http://elixir-lang.org/docs/stable/EEx.html)), and can be
+customized to suit your design:
 
 * `layout.html.eex` The template in which all other templates are embedded
 * `index.html.eex` Renders the home page
