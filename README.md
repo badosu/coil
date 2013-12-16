@@ -77,13 +77,14 @@ See the [EEx docs](http://elixir-lang.org/docs/stable/EEx.html)
 
 The content should be plain markdown.
 
-Pages are stored in `pages/title.md`
+Pages are stored in `pages/title.md` and accessible via `/title`
 
 ### Articles
 
 The content should be plain markdown.
 
-Articles are stored in `articles/YYYY-mm-dd-article-title.md`
+Articles are stored in `articles/YYYY-mm-dd-article-title.md`, and accessed via
+`/articles/YYYY-mm-dd-article-title`.
 
 License
 -------
