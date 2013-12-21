@@ -1,7 +1,3 @@
-/*----------------------------------------------------------------------------
-Global Reset
-----------------------------------------------------------------------------*/
-
 * {
   padding:0;
   margin:0;
@@ -27,34 +23,18 @@ a img{ border:none; }
 .clearfix { display:inline-block; }
 .clearfix { display: block; }
 
-/*----------------------------------------------------------------------------
-Body
-----------------------------------------------------------------------------*/
-
 body {
   margin: 0 auto;
-  font-family: 'Libre Baskerville', Georgia, Times, serif;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1em;
   max-width: 720px;
-  padding: 0 20px;
+  padding: 0 .8em;
 }
 
-body > section {
-  margin-top: 3em;
-  padding: 0 .5em;
-}
-
-body > footer {
-  text-align: left;
-  font-style: italic;
-  color: #888;
-  margin-top: 5em;
-  margin-bottom: 2em;
-  padding-left: .5em;
-}
+body > section { margin-top: 3em; }
 
 body > header {
   margin-top: 1em;
-  padding-left: .5em;
   overflow: hidden;
 }
 
@@ -67,57 +47,7 @@ body > header nav {
   padding: .5em 0 0 3em;
   float: left;
   font-style: italic;
-  font-size: small;
-}
-
-header, footer, section, article { display: block; }
-
-hr { margin: 2em 0; }
-
-a { color: #b83000; }
-
-a:hover { text-decoration: underline; }
-
-h1 a { text-decoration: none; }
-
-section h1 { font-size: 2em; }
-
-section h1 a { color: black; }
-
-code {
-  font-family: 'Anonymous Pro', 'Bitstream Vera Sans', 'Monaco', Courier, mono;
-}
-
-pre { padding: 1em; }
-
-blockquote { font-style: italic; }
-
-.content {
-  line-height: 1.6em;
-  clear: both;
-}
-
-.content p {
-  padding-left: 1em;
-}
-
-.date {
-  font-style: italic;
-  float: right;
-}
-
-.post .more {
-  font-style: italic;
-  text-align: right;
-}
-
-#articles .content {
-  max-width: 45em;
-}
-
-section header {
-  margin-bottom: 3em;
-  height: 2em;
+  font-size: smaller;
 }
 
 header h1 {
@@ -125,10 +55,78 @@ header h1 {
   margin: 0;
 }
 
-h2 {
-  margin-top: 2em;
+body > footer {
+  text-align: left;
+  font-style: italic;
+  color: #888;
+  margin-top: 5em;
+  margin-bottom: 2em;
 }
 
-.more a { text-decoration: none; }
+body > footer a { text-decoration: none; }
 
-.more a:hover { text-decoration: underline }
+body > footer a:hover { text-decoration: underline }
+
+header, footer, section, article { display: block; }
+
+hr { margin: 2em 0 }
+
+code {
+  font-family: 'Anonymous Pro', 'Bitstream Vera Sans', 'Monaco', Courier, mono;
+  padding: 0 .1em;
+}
+
+blockquote { font-style: italic }
+
+a { color: #b83000 }
+
+a:hover { text-decoration: underline }
+
+h1 a { text-decoration: none }
+
+h2 { margin-top: 2em }
+
+section h1 { font-size: 1.7em }
+
+section h1 a { color: black }
+
+section header {
+  margin-bottom: 2em;
+  height: 2em;
+}
+
+.content {
+  line-height: 1.6em;
+  clear: both;
+}
+
+.date {
+  font-style: italic;
+  float: right;
+  padding-top: .3em;
+}
+
+#articles .content { max-width: 45em }
+
+.content hr {
+  margin: 1em 0 1em 0;
+  text-align: center;
+  letter-spacing: 3px;
+  color: #bbb;
+  border: none;
+}
+
+.content hr:before {
+  content: '\2022 \2022 \2022 \2022 \2022';
+}
+
+.content p, .content ul, pre { padding-left: 1em }
+
+body > footer, body > section, body > header { padding-left: .5em }
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+  .content p, pre { padding-left: .3em }
+  .content ul { padding-left: 1em }
+
+  body > footer, body > section, body > header { padding-left: 0 }
+}
