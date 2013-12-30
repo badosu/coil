@@ -7,11 +7,10 @@ defmodule Coil.Mixfile do
       deps: deps ]
   end
 
-  # Configuration for the OTP application
   def application do
     [ mod: { Coil, [] },
       registered: [ :cache_server ],
-      applications: [:cowboy, :mimetypes, :ex_doc, :yamerl] ]
+      applications: [:cowboy, :ex_doc, :yamerl] ]
   end
 
   defp deps do
