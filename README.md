@@ -7,7 +7,7 @@ Requirements
 -------
 
 You must have the latest stable version of elixir installed,
-[v0.12.0](https://github.com/elixir-lang/elixir/releases/tag/v0.12.0) as of
+[v0.12.2](https://github.com/elixir-lang/elixir/releases/tag/v0.12.2) as of
 the writing of this.
 
 Install
