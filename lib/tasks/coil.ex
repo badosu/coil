@@ -2,7 +2,7 @@ defmodule Mix.Tasks.Coil do
   use Mix.Task
 
   def run(args) do
-    case Enum.first(args) do
+    case List.first(args) do
       nil -> IO.puts "You must specify a valid path"
       path ->
         if [:ok, {:error, :eexist}] |> Enum.member?(File.mkdir(path)) do
