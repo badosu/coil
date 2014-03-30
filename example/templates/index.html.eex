@@ -11,7 +11,7 @@
       </section>
       <div class="more"><a href="<%= article[:path] %>">read on &raquo;</a></div>
 
-      <%= unless Enum.first(Enum.reverse(articles)) == article, do: "<hr>" %>
+      <%= unless List.first(Enum.reverse(articles)) == article, do: "<hr>" %>
     </article>
   <% end %>
 </section>

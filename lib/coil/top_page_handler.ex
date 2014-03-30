@@ -4,7 +4,7 @@ defmodule Coil.TopPageHandler do
     articles = Coil.articles
     etag = (:cowboy_req.headers(req) |> elem 0)["if-none-match"]
 
-    if (md5 = Enum.first(articles)[:md5]) == etag do
+    if (md5 = List.first(articles)[:md5]) == etag do
       {:ok, req} = :cowboy_req.reply(304, Coil.headers, "", req)
     else
       index_result = Coil.template("index.html.eex", [articles: articles])
