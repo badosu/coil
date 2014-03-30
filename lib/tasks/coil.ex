@@ -6,7 +6,7 @@ defmodule Mix.Tasks.Coil do
       nil -> IO.puts "You must specify a valid path"
       path ->
         if [:ok, {:error, :eexist}] |> Enum.member?(File.mkdir(path)) do
-          copy_example(path)
+          File.cp_r("example", path)
 
           IO.puts """
 
@@ -19,13 +19,5 @@ Blog structure created!
           IO.puts "You must specify a valid path"
         end
     end
-  end
-
-  defp copy_example(path) do
-    File.cp_r("example", path)
-
-    File.cp_r("deps", Path.join(path, "deps"))
-    File.cp_r("_build", Path.join(path, "_build"))
-    File.cp("mix.lock", path)
   end
 end
