@@ -23,7 +23,7 @@ defmodule Coil do
   end
 
   def article_regex do
-    %r/(?<path>(?<date>\w{4}-\w\w?-\w\w?)-(?<title>[\w-]+))\.md$/g
+    ~r/(?<path>(?<date>\w{4}-\w\w?-\w\w?)-(?<title>[\w-]+))\.md$/g
   end
 
   def headers, do: [ {"Content-Type", "text/html; charset=UTF-8" } ]
@@ -87,7 +87,7 @@ defmodule Coil do
   defp load_page(filename) do
     content = File.read!(filename) |> Markdown.to_html
 
-    meta = %r/(?<title>[\w-]+)\.md$/g |> Regex.named_captures filename
+    meta = ~r/(?<title>[\w-]+)\.md$/g |> Regex.named_captures filename
 
     :gen_server.cast(:cache_server, [filename, [
       content: content,
@@ -101,7 +101,7 @@ defmodule Coil do
 
   defp load_article(filename) do
     content = File.read!(filename) |> Markdown.to_html
-    summary = (%r/(?<summary><p>.*?<\/p>)/gs |> Regex.named_captures content)[:summary]
+    summary = (~r/(?<summary><p>.*?<\/p>)/gs |> Regex.named_captures content)[:summary]
     meta = article_regex |> Regex.named_captures filename
 
     :gen_server.cast(:cache_server, [filename, [
